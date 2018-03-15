@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-03-15T04:32:01.258Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/03/15/mybatis-error1/"/>
+    <id>http://yoursite.com/2018/03/15/mybatis-error1/</id>
+    <published>2018-03-15T03:59:36.541Z</published>
+    <updated>2018-03-15T04:32:01.258Z</updated>
+    
+    <content type="html"><![CDATA[<p>SSM 搭建的项目，启动报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;BlahMapper&apos; defined in file [/Users/**/code/server-loan/B/B/target/classes/cn/A/B/mapper/BlahMapper.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for cn.A.B.mapper.BlahMapper.BaseResultMap</span><br><span class="line"></span><br><span class="line">Caused by: java.lang.IllegalArgumentException: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for cn.A.B.mapper.BlahMapper.BaseResultMap</span><br><span class="line"></span><br><span class="line">Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for cn.A.B.mapper.BlahMapper.BaseResultMap</span><br><span class="line"></span><br><span class="line">Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for cn.A.B.mapper.BlahMapper.BaseResultMap</span><br></pre></td></tr></table></figure></p><p>定位原因是在 mybatis 的 mapper.xml 文件里面有重复的 id 定义。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getMerchantBySpuId"</span> <span class="attr">resultType</span>=<span class="string">"java.lang.String"</span>&gt;</span></span><br><span class="line">select `merchant`</span><br><span class="line">from `inner_merchant_goods`</span><br><span class="line">where `goods_id` = #&#123;spuId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getMerchantBySpuId"</span> <span class="attr">resultType</span>=<span class="string">"java.lang.String"</span>&gt;</span></span><br><span class="line">select `merchant`</span><br><span class="line">from `inner_merchant_goods`</span><br><span class="line">where `goods_id` = #&#123;spuId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;SSM 搭建的项目，启动报错：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
