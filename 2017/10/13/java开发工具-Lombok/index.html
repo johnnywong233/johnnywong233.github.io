@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java开发工具--Lombok | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Lombok介绍问题描述在写POJO代码时，经常需要生成getter和setter方法，以及hashcode、tostring和equals等代码。感觉甚是麻烦，虽然有Eclipse或者intellij IDEA快捷键帮我们自动生成些代码，但感觉还是麻烦（其实就是懒）。偶然中，得知Lombok Project，通过使用注解，可以消除冗余的java代码。官网的介绍：Project Lombok ma">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java开发工具--Lombok">
+<meta property="og:url" content="http://yoursite.com/2017/10/13/java开发工具-Lombok/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Lombok介绍问题描述在写POJO代码时，经常需要生成getter和setter方法，以及hashcode、tostring和equals等代码。感觉甚是麻烦，虽然有Eclipse或者intellij IDEA快捷键帮我们自动生成些代码，但感觉还是麻烦（其实就是懒）。偶然中，得知Lombok Project，通过使用注解，可以消除冗余的java代码。官网的介绍：Project Lombok ma">
+<meta property="og:image" content="http://img.blog.csdn.net/20171013001217933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG9uZWx5bWFub250aGV3YXk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171013001346302?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG9uZWx5bWFub250aGV3YXk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-10-13T01:10:36.191Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java开发工具--Lombok">
+<meta name="twitter:description" content="Lombok介绍问题描述在写POJO代码时，经常需要生成getter和setter方法，以及hashcode、tostring和equals等代码。感觉甚是麻烦，虽然有Eclipse或者intellij IDEA快捷键帮我们自动生成些代码，但感觉还是麻烦（其实就是懒）。偶然中，得知Lombok Project，通过使用注解，可以消除冗余的java代码。官网的介绍：Project Lombok ma">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171013001217933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG9uZWx5bWFub250aGV3YXk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java开发工具-Lombok" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/13/java开发工具-Lombok/" class="article-date">
+  <time datetime="2017-10-12T21:37:19.000Z" itemprop="datePublished">2017-10-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java开发工具--Lombok
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Lombok介绍"><a href="#Lombok介绍" class="headerlink" title="Lombok介绍"></a>Lombok介绍</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在写POJO代码时，经常需要生成getter和setter方法，以及hashcode、tostring和equals等代码。感觉甚是麻烦，虽然有Eclipse或者intellij IDEA快捷键帮我们自动生成些代码，但感觉还是麻烦（其实就是懒）。<br>偶然中，得知Lombok Project，通过使用注解，可以消除冗余的java代码。<br>官网的介绍：Project Lombok makes java a spicier language by adding ‘handlers’ that know &gt;how to build and compile simple, boilerplate-free, not-quite-java code.</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>如果是maven管理的项目，通过引入dependency即可：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.16.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Gradle项目的引入方式类似：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">provided <span class="string">group:</span> <span class="string">'org.projectlombok'</span>, <span class="string">name:</span> <span class="string">'lombok'</span>, <span class="string">version:</span> <span class="string">'1.16.18'</span></div></pre></td></tr></table></figure></p>
+<p>另外，在spring boot项目中，引入Lombok时没有必要指定<version>和<scope>，因为 spring boot 已经帮我们自动配置好。</scope></version></p>
+<h2 id="如何安装"><a href="#如何安装" class="headerlink" title="如何安装"></a>如何安装</h2><p>先说IDEA，在IDEA中安装Lombok需要先安装插件，快捷键 Ctrl + Alt + S，然后选择 plugins——&gt; browse repositories，搜索 Lombok，install即可，安装需要重启。<br>其次，Lombok是在编译时期，自动生成所需方法的，所以需要开启annotation processing；依旧是刚才的快捷键，可以搜索”annotation processing”，然后选择”Enable annotation processing”.<br>如果是Eclipse的话，官网下载最新的Lombok.jar，双击或者执行命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar lombok.jar</div></pre></td></tr></table></figure></p>
+<p>在弹出的窗口，确认刚才 Lombok 扫描整个硬盘得到的Eclipse安装程序结果即可（Eclipse，MyEclipse，STS(Spring tool suite)），点击 Install/Update。</p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>刚才提到，Lombok是通过注解来减少编码的，那都提供哪些注解呢？<br>不完全统计：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@NonNull：标识对象是否为空，为空则抛出异常</div><div class="line">@Getter/@Setter：自动生成Getter/Setter方法</div><div class="line">@ToString：覆盖tostring方法，可以添加限制条件</div><div class="line">@EqualsAndHashCode：覆盖equal和hashCode方法，生成方法时只会使用类中的非静态和非transient成员变量</div><div class="line">@Data：@Getter/@Setter, @ToString, @EqualAndHashCode，@AllArgsConstructor等组合</div><div class="line">@Cleanup：用在变量前面，可以保证此变量代表的资源会被自动关闭，默认是调用资源的close()方法，如果该资源有其它关闭方法，可使用@Cleanup(“methodName”)来指定要调用的方法</div><div class="line">@NoArgsConstructor/@RequiredArgsConstructor /@AllArgsConstructor：第二个注解使用类中所有带有@NonNull注解的或带有final修饰的非静态成员变量生成对应的构造方法，</div><div class="line">@Log：类注解，可以省去从日志工厂生成日志对象这一步，直接进行日志记录，具体注解根据日志工具的不同而不同，同时，可以在注解中使用topic来指定生成log对象时的类名</div><div class="line">@Builder：关于build模式，可以参考《Effective  java》这本书</div><div class="line">@Value</div><div class="line">@SneakyThrows</div><div class="line">@Synchronized</div></pre></td></tr></table></figure></p>
+<h2 id="实例代码判断"><a href="#实例代码判断" class="headerlink" title="实例代码判断"></a>实例代码判断</h2><p>上面的注解简介太模糊？看看实例：</p>
+<h3 id="1-Getter-amp-Setter-amp-ToString"><a href="#1-Getter-amp-Setter-amp-ToString" class="headerlink" title="1 @Getter &amp; @Setter &amp; @ToString"></a>1 @Getter &amp; @Setter &amp; @ToString</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> employed;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">    Person() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">say</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getName();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Person(employed="</span> + <span class="keyword">this</span>.isEmployed() + <span class="string">", name="</span> + <span class="keyword">this</span>.getName() + <span class="string">")"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmployed</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.employed;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmployed</span><span class="params">(<span class="keyword">boolean</span> employed)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.employed = employed;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果使用Lombok提供的注解：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ToString</span></div><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="meta">@Getter</span></div><div class="line">    <span class="meta">@Setter</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> employed;</div><div class="line">    <span class="meta">@Getter</span></div><div class="line">    <span class="meta">@Setter</span>(AccessLevel.PROTECTED)</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">say</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getName();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-Builder"><a href="#2-Builder" class="headerlink" title="2. @Builder"></a>2. @Builder</h3><p>这次先看看使用注解之前的java code:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Builder</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuilderExample</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再看看其经过编译之后的java code:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.beans.ConstructorProperties;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuilderExample</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">    <span class="meta">@ConstructorProperties</span>(&#123;<span class="string">"name"</span>, <span class="string">"age"</span>&#125;)</div><div class="line">    BuilderExample(String name, <span class="keyword">int</span> age) &#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> BuilderExample.<span class="function">BuilderExampleBuilder <span class="title">builder</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BuilderExample.BuilderExampleBuilder();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">BuilderExampleBuilder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> String name;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">        BuilderExampleBuilder() &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> BuilderExample.<span class="function">BuilderExampleBuilder <span class="title">name</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> BuilderExample.<span class="function">BuilderExampleBuilder <span class="title">age</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.age = age;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> BuilderExample <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> BuilderExample(<span class="keyword">this</span>.name, <span class="keyword">this</span>.age);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"BuilderExample.BuilderExampleBuilder(name="</span> + <span class="keyword">this</span>.name + <span class="string">", age="</span> + <span class="keyword">this</span>.age + <span class="string">")"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="3-Data"><a href="#3-Data" class="headerlink" title="3. @Data"></a>3. @Data</h3><p>先看使用注解的类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Integer id;</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译之后的类长这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Integer id;</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">this</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> User)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            User other = (User)o;</div><div class="line">            <span class="keyword">if</span> (!other.canEqual(<span class="keyword">this</span>)) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                Object <span class="keyword">this</span>$id = <span class="keyword">this</span>.getId();</div><div class="line">                Object other$id = other.getId();</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>$id == <span class="keyword">null</span>) &#123;</div><div class="line">                    <span class="keyword">if</span> (other$id != <span class="keyword">null</span>) &#123;</div><div class="line">                        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="keyword">this</span>$id.equals(other$id)) &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                Object <span class="keyword">this</span>$password = <span class="keyword">this</span>.getPassword();</div><div class="line">                Object other$password = other.getPassword();</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>$password == <span class="keyword">null</span>) &#123;</div><div class="line">                    <span class="keyword">if</span> (other$password != <span class="keyword">null</span>) &#123;</div><div class="line">                        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="keyword">this</span>$password.equals(other$password)) &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">canEqual</span><span class="params">(Object other)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> other <span class="keyword">instanceof</span> User;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> PRIME = <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">int</span> result = <span class="number">1</span>;</div><div class="line">        Object $id = <span class="keyword">this</span>.getId();</div><div class="line">        <span class="keyword">int</span> result = result * <span class="number">59</span> + ($id == <span class="keyword">null</span> ? <span class="number">43</span> : $id.hashCode());</div><div class="line">        Object $password = <span class="keyword">this</span>.getPassword();</div><div class="line">        result = result * <span class="number">59</span> + ($password == <span class="keyword">null</span> ? <span class="number">43</span> : $password.hashCode());</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"User(id="</span> + <span class="keyword">this</span>.getId() + <span class="string">", password="</span> + <span class="keyword">this</span>.getPassword() + <span class="string">")"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>更多注解的用法，感兴趣的话，请参考<a href="https://projectlombok.org/" target="_blank" rel="external">官网</a>。</p>
+<h2 id="Lombok原理"><a href="#Lombok原理" class="headerlink" title="Lombok原理"></a>Lombok原理</h2><p>采用JSR269所提出的插入式注解处理(Pluggable Annotation Processing)，并结合动态代码生成技术所开发的。如下图所示：<br><img src="http://img.blog.csdn.net/20171013001217933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG9uZWx5bWFub250aGV3YXk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>图示为 javac 的编译过程，java文件首先通过进行解析构建出一个AST，然后执行注解处理，最后经过分析优化生成二进制的.class文件。<br>Annotation Processing 是在解析和生成之间的一个步骤:<br><img src="http://img.blog.csdn.net/20171013001346302?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbG9uZWx5bWFub250aGV3YXk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>上图是 Lombok 处理流程，在Javac 解析成抽象语法树之后(AST)，Lombok 根据自己的注解处理器，动态的修改 AST，增加新的节点(所谓代码)，最终通过分析和生成字节码。</p>
+<h2 id="Lombok缺点"><a href="#Lombok缺点" class="headerlink" title="Lombok缺点"></a>Lombok缺点</h2><p>这么好的工具，那可以应用到生产环境吗？真不一定，Lombok 注解的引入一定程度上会造成源码的可读性（不是所有人都了解其使用）和完整性，而且生成环境使用，不一定还会遇到什么坑，看看<a href="https://github.com/rzwitserloot/lombok/issues" target="_blank" rel="external">其代码托管GitHub的issue</a>就知道。<br>不过反过来一想，issue 开得多，不正说明应用还是很广泛的吗？</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://kriszhang.com/lombok/#基本实现原理" target="_blank" rel="external">基本实现原理</a><br><a href="http://openjdk.java.net/groups/compiler/doc/compilation-overview/index.html" target="_blank" rel="external">jdk-compilation-overview</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/13/java开发工具-Lombok/" data-id="cj8ozkfq80001yoqr0r4q8y1t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 10px;">java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/13/java开发工具-Lombok/">java开发工具--Lombok</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/13/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
